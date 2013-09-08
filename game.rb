@@ -11,28 +11,51 @@ class Game
       new_row = []
 
       row.each_with_index do |cell, cell_number|
-        neighbor_below = if grid[row_number +1]
-                           grid[row_number + 1][cell_number]
-                         else
-                           nil
-                         end
+        below = if grid[row_number +1]
+                  grid[row_number + 1][cell_number]
+                else
+                  nil
+                end
 
-        neighbor_above = if row_number - 1 >= 0
-                           grid[row_number -1][cell_number]
-                         else
-                           nil
-                         end
+        left_below = if grid[row_number + 1] && cell_number - 1 >= 0
+                       grid[row_number + 1][cell_number - 1]
+                     else
+                       nil
+                     end
 
-        neighbor_ahead = grid[row_number][cell_number + 1]
+        right_below = if grid[row_number + 1]
+                        grid[row_number + 1][cell_number + 1]
+                      else
+                        nil
+                      end
 
-        neighbor_behind = if cell_number - 1 >= 0
-                            grid[row_number][cell_number - 1]
-                          else
-                            nil
-                          end
+        above = if row_number - 1 >= 0
+                  grid[row_number -1][cell_number]
+                else
+                  nil
+                end
 
-        neighbors = [neighbor_above, neighbor_ahead, neighbor_behind, neighbor_below]
+        left_above = if row_number - 1 >= 0 && cell_number - 1 >= 0
+                       grid[row_number - 1][cell_number - 1]
+                     else
+                       nil
+                     end
 
+        right_above = if row_number - 1 >= 0
+                        grid[row_number - 1][cell_number + 1]
+                      else
+                        nil
+                      end
+
+        ahead = grid[row_number][cell_number + 1]
+
+        behind = if cell_number - 1 >= 0
+                   grid[row_number][cell_number - 1]
+                 else
+                   nil
+                 end
+
+        neighbors = [above, ahead, behind, below, left_above, left_below, right_above, right_below]
 
         live_neighbors = neighbors.select { |n| n == 1 }.count
 

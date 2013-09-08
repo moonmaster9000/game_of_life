@@ -1,7 +1,7 @@
 require_relative "../game"
 
 
-describe Game do
+describe "Conway's Game of life" do
   let(:game) { Game.new grid }
 
   before do
@@ -53,8 +53,8 @@ describe Game do
 
       it "lives" do
         game.grid.should == [
-            [1, 0],
-            [0, 0]
+            [1, 1],
+            [1, 1]
         ]
       end
     end
@@ -69,8 +69,8 @@ describe Game do
 
       it "lives" do
         game.grid.should == [
-            [0, 1, 0],
-            [0, 0, 0]
+            [1, 1, 1],
+            [1, 1, 1]
         ]
       end
     end
@@ -87,9 +87,9 @@ describe Game do
 
     it "dies" do
       game.grid.should == [
-          [0, 0, 0],
-          [0, 0, 0],
-          [0, 0, 0],
+          [1, 1, 1],
+          [1, 0, 1],
+          [1, 1, 1],
       ]
     end
   end
@@ -104,7 +104,7 @@ describe Game do
 
     it "comes back to life like a zombie" do
       game.grid.should == [
-          [0,0,0],
+          [0,1,0],
           [0,1,0]
       ]
     end
